@@ -7,7 +7,7 @@
 function Navbar() {
     return (
       <nav className="navbar-elegance">
-        <div className="navbar-container">
+        <div className="navbar-container"> 
           {/* Logo */}
           <a href="/" className="navbar-logo">
             ELEGANCE
