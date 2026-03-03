@@ -1,84 +1,61 @@
+// Importamos os componentes
 import Layout from "./components/layout/Layout";
-import ProductCard from "./components/shop/ProductCard";
+import HeroBanner from "./components/home/HeroBanner";
+import ProductCarousel from "./components/home/ProductCarousel";
+import PromoBanner from "./components/home/PromoBanner";
 
-/**
- * Componente App
- * 
- * Componente principal da aplicação.
- * Aqui demonstramos:
- * - Uso do Layout com children
- * - Passagem de props para ProductCard
- * - Renderização de listas com map()
- */
-function App() {
-  // Dados dos produtos (simulando dados de uma API)
-  const products = [
-    {
-      id: 1,
-      name: "Vestido Floral",
-      price: 189.90,
-      oldPrice: 249.90,
-      image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400&h=600&fit=crop",
-      tag: "Vestidos",
-      isNew: true,
-      discount: 24,
-    },
-    {
-      id: 2,
-      name: "Blusa de Seda",
-      price: 129.90,
-      image: "https://images.unsplash.com/photo-1564246544814-647f76867e20?w=400&h=600&fit=crop",
-      tag: "Blusas",
-      isNew: false,
-      discount: null,
-    },
-    {
-      id: 3,
-      name: "Calça Jeans",
-      price: 199.90,
-      image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&h=600&fit=crop",
-      tag: "Calças",
-      isNew: true,
-      discount: null,
-    },
-    {
-      id: 4,
-      name: "Saia Midi",
-      price: 149.90,
-      oldPrice: 189.90,
-      image: "https://images.unsplash.com/photo-1583496661160-fb5886a0aaaa?w=400&h=600&fit=crop",
-      tag: "Saias",
-      isNew: false,
-      discount: 21,
-    },
-  ];
+// O App agora recebe products como prop (vem do main.jsx)
+function App({ products = [] }) {
+    // Dados dos slides do banner
+    const heroSlides = [
+        {
+            image: "https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=1600&h=900&fit=crop",
+            title: "Nova Coleção Verão",
+            subtitle: "Descubra as tendências da estação com até 40% OFF",
+            buttonText: "Comprar Agora",
+        },
+        {
+            image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1600&h=900&fit=crop",
+            title: "Elegância em Cada Detalhe",
+            subtitle: "Peças exclusivas para mulheres que fazem a diferença",
+            buttonText: "Ver Coleção",
+        },
+        {
+            image: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1600&h=900&fit=crop",
+            title: "Estilo Atemporal",
+            subtitle: "Clássicos que nunca saem de moda",
+            buttonText: "Explorar",
+        },
+    ];
 
-  return (
-    // Layout envolve todo o conteúdo (usando children)
-    <Layout>
-      {/* Seção de produtos */}
-      <section className="section">
-        <div className="container">
-          {/* Cabeçalho da seção */}
-          <div className="section-header">
-            <h2 className="section-title">Nossos Produtos</h2>
-            <p className="section-subtitle">Confira as novidades da coleção</p>
-          </div>
+    return (
+        <Layout>
+            {/* Banner principal */}
+            <HeroBanner slides={heroSlides} />
 
-          {/* Grid de produtos */}
-          <div className="product-grid">
-            {/* 
-              Usando map() para renderizar uma lista de produtos.
-              Cada item precisa de uma 'key' única.
-            */}
-            {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-          </div>
-        </div>
-      </section>
-    </Layout>
-  );
+            {/* Carrossel de Novidades - todos os produtos */}
+            <ProductCarousel
+                products={products}
+                title="Novidades"
+                subtitle="As últimas peças que acabaram de chegar"
+            />
+
+            {/* Banner promocional */}
+            <PromoBanner
+                image="https://images.unsplash.com/photo-1445205170230-053b83016050?w=1600&h=600&fit=crop"
+                title="Outlet com até 50% OFF"
+                subtitle="Peças selecionadas com preços imperdíveis"
+                buttonText="Ver Ofertas"
+            />
+
+            {/* Carrossel de Mais Vendidos - primeiros 8 produtos */}
+            <ProductCarousel
+                products={products.slice(0, 8)}
+                title="Mais Vendidos"
+                subtitle="Os queridinhos das nossas clientes"
+            />
+        </Layout>
+    );
 }
 
 export default App;

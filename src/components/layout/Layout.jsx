@@ -1,35 +1,25 @@
+// Importamos os componentes que fazem parte do Layout
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-/**
- * Componente Layout
- * 
- * Este componente demonstra o uso de CHILDREN.
- * Children permite que o conteúdo seja passado entre as tags.
- * 
- * O Layout "envolve" o conteúdo da página, adicionando
- * Navbar no topo e Footer no rodapé.
- * 
- * @param {ReactNode} children - O conteúdo da página
- */
-function Layout({ children }) {
-  return (
-    <div className="layout-elegance">
-      {/* Navbar sempre aparece no topo */}
-      <Navbar />
-      
-      {/* 
-        O children representa o conteúdo específico de cada página.
-        Pode ser a Home, Produtos, Sobre, etc.
-      */}
-      <main className="main-elegance">
-        {children}
-      </main>
-      
-      {/* Footer sempre aparece no rodapé */}
-      <Footer />
-    </div>
-  );
-}
+// Componente Layout
+// Recebe "children" como prop - tudo que estiver entre <Layout> e </Layout>
+// Esse padrão é chamado de COMPOSIÇÃO
+export default function Layout({ children }) {
+    return (
+        <div className="layout-elegance">
+            {/* Navbar sempre aparece no topo */}
+            <Navbar />
 
-export default Layout;
+            {/* 
+                O children é o conteúdo específico de cada página
+                Pode ser a Home, a página de Produtos, o Carrinho, etc.
+                O Layout não precisa saber o que é - só renderiza!
+            */}
+            <main className="main-elegance">{children}</main>
+
+            {/* Footer sempre aparece no rodapé */}
+            <Footer />
+        </div>
+    );
+}
