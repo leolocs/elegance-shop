@@ -6,7 +6,7 @@
  */
 
 // URL base da sua MockAPI
-const API_URL = "https://SEU-PROJETO.mockapi.io/api";
+const API_URL = "https://696b7b27624d7ddccaa15948.mockapi.io/api/products";
 
 /**
  * Busca todos os produtos
